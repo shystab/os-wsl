@@ -11,14 +11,14 @@ const char error_msg[] = "An error has occurred\n";
 static char **path_dirs = NULL;
 static int path_count = 0;
 
-void execute(char *cmd, int should_wait);
+
 void print_error();
-void init_path();
-void free_path();
+void init_path();//初始化系统path
+void free_path();//清空path 退出程序处理
 static void set_path(char **dirs, int ndirs);
-void split_parallel_commands(char *line);
-void execute(char *cmd_str, int wait_falg);
-void parse_and_execute(char *line);
+void split_parallel_commands(char *line);//拆分命令 让命令并发运行
+void execute(char *cmd_str, int wait_falg);//识别重定向和普通参数path 然后fork 为了并发设置waitflag
+void parse_and_execute(char *line);//去除换行 调用split函数
 
 int main(int argc, char *argv[]){
     init_path();
